@@ -1,0 +1,25 @@
+.post {
+    width: 500px;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.post div{
+    margin-bottom:10px;
+}
+
+.author_name {
+    margin-left: 10px;
+    font-size: 20px;
+    vertical-align: top;
+
+}
+.author_block .avatar {
+    width: 50px;
+    height: 50px;
+}
+
+.post_image {
+    width: 100%;
+}
