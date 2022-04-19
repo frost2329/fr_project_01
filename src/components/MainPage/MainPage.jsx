@@ -12,8 +12,10 @@ const MainPage = (props) => {
             <Navbar/>
             <div className={s.main_content}>
                 <Routes>
-                    <Route path="/profile" element={ <Profile profileState={props.mainPageState.profileState}/> }  />
-                    <Route path="/dialogs/*" element={<Messenger messengerState={props.mainPageState.messengerState}/>}/>
+                    <Route path="/profile"
+                           element={<Profile profileState={props.state.profileState} dispatch={props.dispatch}/>}/>
+                    <Route path="/dialogs/*"
+                           element={<Messenger messengerState={props.state.messengerState} dispatch={props.dispatch}/>}/>
                 </Routes>
             </div>
         </div>

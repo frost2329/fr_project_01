@@ -13,10 +13,7 @@
     width: 500px;
     border: none;
 }
-.new_post .input_table:active {
-    width: 100%;
-    border: none;
-}
+
 .posts{
     width: 520px;
     background-color: #ffffff;

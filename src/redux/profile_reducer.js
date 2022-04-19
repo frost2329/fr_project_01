@@ -1,20 +1,20 @@
-const ADD_MESSAGE = 'ADD_MESSAGE';
-const UPDATE_NEW_MESSAGE_DATA = 'UPDATE_NEW_MESSAGE_DATA';
+const ADD_POST = 'ADD_POST';
+const UPDATE_NEW_POST_DATA = 'UPDATE_NEW_POST_DATA';
 
-const messengerReducer = (state, action) => {
-    if (action.type === ADD_MESSAGE) {
-        let newMessage = {};
-        Object.assign(newMessage, state.newMessageData);
-        state.messageData.push(newMessage);
-        state.newMessageData.message_text = '';
+const profileReducer = (state, action) => {
+    if (action.type === ADD_POST) {
+        let newPost = {};
+        Object.assign(newPost, state.myPostsState.newPostData);
+        state.myPostsState.postData.push(newPost);
+        state.myPostsState.newPostData.post_text = '';
     }
-    else if (action.type === UPDATE_NEW_MESSAGE_DATA) {
-        let newMessageData = {};
-        Object.assign(newMessageData, state.newMessageData);
-        newMessageData.message_text = action.message_text;
-        state.newMessageData = newMessageData;
+    else if (action.type === UPDATE_NEW_POST_DATA) {
+        let NewPostData = {};
+        Object.assign(NewPostData, state.myPostsState.newPostData);
+        NewPostData.post_text = action.post_text;
+        state.myPostsState.newPostData = NewPostData;
     }
     return state;
 }
 
-export default messengerReducer;
+export default profileReducer;

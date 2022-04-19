@@ -9,7 +9,7 @@ const App = (props) => {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <MainPage mainPageState={props.state.mainPageState}/>
+                <MainPage state={props.state} dispatch={props.dispatch}/>
             </div>
         </BrowserRouter>
 
