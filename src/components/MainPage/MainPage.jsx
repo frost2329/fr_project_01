@@ -3,8 +3,8 @@ import Navbar from "./Navbar/Navbar";
 import Profile from "./Profile/Profile";
 import s from "./MainPage.module.css";
 import {Route} from "react-router-dom";
-import Messenger from "./Messenger/Messenger";
 import {Routes} from "react-router";
+import MessengerContainer from "./Messenger/MessengerContainer";
 
 const MainPage = (props) => {
     return (
@@ -13,9 +13,9 @@ const MainPage = (props) => {
             <div className={s.main_content}>
                 <Routes>
                     <Route path="/profile"
-                           element={<Profile profileState={props.state.profileState} dispatch={props.dispatch}/>}/>
+                           element={<Profile store={props.store} profileState={props.state.profileState} dispatch={props.dispatch}/>}/>
                     <Route path="/dialogs/*"
-                           element={<Messenger messengerState={props.state.messengerState} dispatch={props.dispatch}/>}/>
+                           element={<MessengerContainer store={props.store} />}/>
                 </Routes>
             </div>
         </div>
