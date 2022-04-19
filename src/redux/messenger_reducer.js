@@ -1,7 +1,27 @@
 const ADD_MESSAGE = 'ADD_MESSAGE';
 const UPDATE_NEW_MESSAGE_DATA = 'UPDATE_NEW_MESSAGE_DATA';
 
-const messengerReducer = (state, action) => {
+let initialState = {
+    dialogData: [
+        {id: 1, name: 'Ben'},
+        {id: 2, name: 'Anna'},
+        {id: 3, name: 'Sofia'}
+    ],
+    messageData: [
+        {message_id: 1, dialog_id: 1, user_id:1, message_text: 'Hi'},
+        {message_id: 2, dialog_id: 1, user_id:1, message_text: 'How are you?'},
+        {message_id: 3, dialog_id: 1, user_id:1, message_text: 'Where are you?'},
+        {message_id: 4, dialog_id: 1, user_id:1, message_text: 'Are you ok??'}
+    ],
+    newMessageData: {
+        message_id: 5,
+        dialog_id: 1,
+        user_id: 1,
+        message_text: ''
+    }
+}
+
+const messengerReducer = (state = initialState, action) => {
     if (action.type === ADD_MESSAGE) {
         let newMessage = {};
         Object.assign(newMessage, state.newMessageData);

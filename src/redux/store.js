@@ -27,7 +27,7 @@ const store = {
                     dialog_id: 1,
                     user_id: 1,
                     message_text: ''
-                },
+                }
             },
         profileState: {
                 myPostsState: {
