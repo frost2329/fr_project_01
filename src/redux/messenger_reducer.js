@@ -22,6 +22,7 @@ let initialState = {
 }
 
 const messengerReducer = (state = initialState, action) => {
+    debugger;
     if (action.type === ADD_MESSAGE) {
         let newMessage = {};
         Object.assign(newMessage, state.newMessageData);
@@ -36,5 +37,14 @@ const messengerReducer = (state = initialState, action) => {
     }
     return state;
 }
+
+export const addMessageAC = () => ({
+    type: ADD_MESSAGE
+})
+export const updateNewMessageDataAC = (message_text) => ({
+    type: UPDATE_NEW_MESSAGE_DATA,
+    message_text: message_text
+
+})
 
 export default messengerReducer;

@@ -56,4 +56,12 @@ const profileReducer = (state = initialState, action) => {
     return state;
 }
 
+export const addPostAC = () => ({
+    type: ADD_POST
+})
+export const updateNewPostDataAC = (post_text) => ({
+    type: UPDATE_NEW_POST_DATA,
+    post_text: post_text
+})
+
 export default profileReducer;
