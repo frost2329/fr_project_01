@@ -22,21 +22,20 @@ let initialState = {
 }
 
 const messengerReducer = (state = initialState, action) => {
-    debugger;
-    if (action.type === ADD_MESSAGE) {
-        return {
-            ...state,
-            messageData: [...state.messageData, state.newMessageData],
-            newMessageData: {...state.newMessageData, message_text: ''}
-        }
+    switch (action.type) {
+        case ADD_MESSAGE:
+            return {
+                ...state,
+                messageData: [...state.messageData, state.newMessageData],
+                newMessageData: {...state.newMessageData, message_text: ''}
+            };
+        case UPDATE_NEW_MESSAGE_DATA:
+            return {
+                ...state,
+                newMessageData: {...state.newMessageData, message_text: action.message_text}
+            }
+        default: return state;
     }
-    else if (action.type === UPDATE_NEW_MESSAGE_DATA) {
-        return {
-            ...state,
-            newMessageData: {...state.newMessageData, message_text: action.message_text}
-        }
-    }
-    else return {...state};
 }
 
 export const addMessageAC = () => ({

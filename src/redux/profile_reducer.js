@@ -41,26 +41,26 @@ let initialState = {
 }
 
 const profileReducer = (state = initialState, action) => {
-    if (action.type === ADD_POST) {
-        return {
-            ...state,
-            myPostsState: {
-                postData: [...state.myPostsState.postData, state.myPostsState.newPostData],
-                newPostData: {...state.myPostsState.newPostData, post_text: ''}
-            }
-        }
+    switch (action.type) {
+        case ADD_POST:
+            return {
+                ...state,
+                myPostsState: {
+                    postData: [...state.myPostsState.postData, state.myPostsState.newPostData],
+                    newPostData: {...state.myPostsState.newPostData, post_text: ''}
+                }
+            };
+        case UPDATE_NEW_POST_DATA:
+            return {
+                ...state,
+                myPostsState: {
+                    ...state.myPostsState,
+                    newPostData: {...state.myPostsState.newPostData, post_text: action.post_text}
+                }
+            };
+        default:
+            return state;
     }
-    else if (action.type === UPDATE_NEW_POST_DATA) {
-        return {
-            ...state,
-            myPostsState: {
-                ...state.myPostsState,
-                newPostData: {...state.myPostsState.newPostData, post_text: action.post_text}
-            }
-        }
-
-    }
-    else return state;
 }
 
 export const addPostAC = () => ({
