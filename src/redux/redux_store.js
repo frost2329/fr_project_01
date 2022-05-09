@@ -1,10 +1,12 @@
 import {combineReducers, createStore} from "redux";
-import profile_reducer from "./profile_reducer";
-import messenger_reducer from "./messenger_reducer";
+import messengerReducer from "./messenger_reducer";
+import profileReducer from "./profile_reducer";
+import usersReducer from "./users_reduser";
 
 let reducers = combineReducers({
-    profileState: profile_reducer,
-    messengerState: messenger_reducer
+    profileState: profileReducer,
+    messengerState: messengerReducer,
+    usersState: usersReducer
 })
 
 let store = createStore(reducers);

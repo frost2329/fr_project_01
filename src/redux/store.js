@@ -78,7 +78,6 @@ const store = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        debugger;
         this._state.profileState = profileReducer(this._state.profileState, action);
         this._state.messengerState = messengerReducer(this._state.messengerState, action);
         this._callSubscriber(this._state);

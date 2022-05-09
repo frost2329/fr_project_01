@@ -5,7 +5,6 @@ import {addMessageAC, updateNewMessageDataAC} from "../../../redux/messenger_red
 
 /*const MessengerContainer = (props) => {
     let state = props.store.getState();
-
     let updateMessageText = (message_text) => {
         props.store.dispatch(updateNewMessageDataAC(message_text));
     }

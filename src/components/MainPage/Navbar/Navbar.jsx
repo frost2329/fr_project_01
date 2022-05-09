@@ -33,6 +33,10 @@ const Navbar = () => {
                     <NavLink to='/settings'
                              className={s.item}>Settings</NavLink>
                 </div>
+                <div>
+                    <NavLink to='/users'
+                             className={s.item}>Users</NavLink>
+                </div>
             </div>
         </nav>
     )
