@@ -11,17 +11,17 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        follow(user_id) {
-            console.log('follow'+ user_id)
-            dispatch(followAC(user_id));
+        follow(id) {
+            console.log('follow'+ id)
+            dispatch(followAC(id));
         },
-        unFollow(user_id) {
-            console.log('unFollow'+ user_id)
-            dispatch(unfollowAC(user_id));
+        unFollow(id) {
+            console.log('unFollow'+ id)
+            dispatch(unfollowAC(id));
         },
         setUsers(usersData){
             console.log('setUsers'+ usersData)
-            dispatch(setUsersAC());
+            dispatch(setUsersAC(usersData));
         }
     }
 }
