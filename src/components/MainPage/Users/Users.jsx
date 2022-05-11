@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 import User from "./User/User";
-
+import Loading from "../../common/Loading/Loading";
 const Users = (props) => {
 
     let pageCount = Math.ceil(/*props.usersState.totalCount;*/300 / props.usersState.count);
@@ -26,6 +26,7 @@ const Users = (props) => {
             <div>
                 {pageNumberButtonsArray}
             </div>
+            <Loading isLoading={props.usersState.isLoading}/>
             <div>
                 {usersElemets}
             </div>

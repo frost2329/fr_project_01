@@ -1,21 +1,32 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {followAC, setCurrentPageAC, setTotalCountAC, setUsersAC, unfollowAC} from "../../../redux/users_reduser";
+import {
+    followAC,
+    setCurrentPageAC,
+    setLoadingAC,
+    setTotalCountAC,
+    setUsersAC,
+    unfollowAC
+} from "../../../redux/users_reduser";
 import * as axios from "axios";
 import Users from "./Users";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
+        this.props.setLoading(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersState.count}&page=${this.props.usersState.currentPage}`)
             .then((response) => {
+                this.props.setLoading(false);
                 this.props.setUsers(response.data.items);
-                this.props.setTotalCount(response.data.totalCount);
+                this.props.setTotalCount(response.data.totalCount)
             });
     }
     onPageNumber = (pageNumber) => {
+        this.props.setLoading(true);
         this.props.setCurrentPage(pageNumber);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersState.count}&page=${pageNumber}`)
             .then((response) => {
+                this.props.setLoading(false);
                 this.props.setUsers(response.data.items);
             });
     }
@@ -55,7 +66,12 @@ let mapDispatchToProps = (dispatch) => {
         setCurrentPage(pageNumber){
             console.log('setCurrentPage'+ pageNumber)
             dispatch(setCurrentPageAC(pageNumber));
+        },
+        setLoading(isLoading){
+            console.log('setLoading'+ isLoading)
+            dispatch(setLoadingAC(isLoading));
         }
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
