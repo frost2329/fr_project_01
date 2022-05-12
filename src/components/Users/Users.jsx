@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 import User from "./User/User";
-import Loading from "../../common/Loading/Loading";
+import Loading from "../common/Loading/Loading";
 const Users = (props) => {
 
     let pageCount = Math.ceil(/*props.usersState.totalCount;*/300 / props.usersState.count);
@@ -12,7 +12,7 @@ const Users = (props) => {
     pageNumberButtonsArray = pageNumberButtonsArray.map((pageNumber) => {
         return (
             <span className={props.usersState.currentPage === pageNumber ? s.currentPageNumber : s.pageNumber}
-                  onClick={(e) => {props.onPageNumber(pageNumber);}}>
+                  onClick={() => {props.onPageNumber(pageNumber);}}>
                     {pageNumber}
                 </span>
         )

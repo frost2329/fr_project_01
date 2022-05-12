@@ -9,5 +9,14 @@
   background-color: #edeef0;
 
 }
-
+.main_page {
+  grid-area: m;
+  display: grid;
+  grid-template-areas:"n c";
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 10px;
+  width: 1000px;
+  min-height: 1000px;
+  margin: 0 auto;
+}
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {follow, setCurrentPage, setLoading,
-        setTotalCount, setUsers, unFollow} from "../../../redux/users_reduser";
+        setTotalCount, setUsers, unFollow} from "../../redux/users_reduser";
 import * as axios from "axios";
 import Users from "./Users";
 
