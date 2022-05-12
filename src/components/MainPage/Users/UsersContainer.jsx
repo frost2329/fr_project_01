@@ -1,13 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {
-    followAC,
-    setCurrentPageAC,
-    setLoadingAC,
-    setTotalCountAC,
-    setUsersAC,
-    unfollowAC
-} from "../../../redux/users_reduser";
+import {follow, setCurrentPage, setLoading,
+        setTotalCount, setUsers, unFollow} from "../../../redux/users_reduser";
 import * as axios from "axios";
 import Users from "./Users";
 
@@ -45,33 +39,13 @@ let mapStateToProps = (state) => {
         usersState: state.usersState
     }
 }
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow(id) {
-            console.log('follow'+ id)
-            dispatch(followAC(id));
-        },
-        unFollow(id) {
-            console.log('unFollow'+ id)
-            dispatch(unfollowAC(id));
-        },
-        setUsers(usersData){
-            console.log('setUsers'+ usersData)
-            dispatch(setUsersAC(usersData));
-        },
-        setTotalCount(totalCount){
-            console.log('setTotalCount'+ totalCount)
-            dispatch(setTotalCountAC(totalCount));
-        },
-        setCurrentPage(pageNumber){
-            console.log('setCurrentPage'+ pageNumber)
-            dispatch(setCurrentPageAC(pageNumber));
-        },
-        setLoading(isLoading){
-            console.log('setLoading'+ isLoading)
-            dispatch(setLoadingAC(isLoading));
-        }
 
-    }
+let dispachForProps = {
+    follow,
+    unFollow,
+    setUsers,
+    setTotalCount,
+    setCurrentPage,
+    setLoading
 }
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, dispachForProps)(UsersContainer);
