@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {follow, setCurrentPage, setLoading,
-        setTotalCount, setUsers, unFollow} from "../../redux/users_reduser";
+import {
+    follow, setCurrentPage, setLoading,
+    setTotalCount, setUsers, unFollow
+} from "../../redux/users_reduser";
 import * as axios from "axios";
 import Users from "./Users";
 
@@ -15,6 +17,7 @@ class UsersContainer extends React.Component {
                 this.props.setTotalCount(response.data.totalCount)
             });
     }
+
     onPageNumber = (pageNumber) => {
         this.props.setLoading(true);
         this.props.setCurrentPage(pageNumber);
@@ -24,6 +27,7 @@ class UsersContainer extends React.Component {
                 this.props.setUsers(response.data.items);
             });
     }
+
     render() {
         return (
             <Users usersState={this.props.usersState}

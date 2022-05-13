@@ -4,9 +4,9 @@ import Header from "./components/Header/Header";
 import {BrowserRouter, Route} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import {Routes} from "react-router";
-import Profile from "./components/Profile/Profile";
 import MessengerContainer from "./components/Messenger/MessengerContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 const App = (props) => {
@@ -19,11 +19,11 @@ const App = (props) => {
                     <div className='main_content'>
                         <Routes>
                             <Route path="/profile"
-                                   element={<Profile store={props.store} profileState={props.state.profileState} dispatch={props.dispatch}/>}/>
+                                   element={<ProfileContainer />}/>
                             <Route path="/dialogs/*"
-                                   element={<MessengerContainer store={props.store} />}/>
+                                   element={<MessengerContainer />}/>
                             <Route path="/users/*"
-                                   element={<UsersContainer store={props.store} />}/>
+                                   element={<UsersContainer />}/>
                         </Routes>
                     </div>
                 </div>
