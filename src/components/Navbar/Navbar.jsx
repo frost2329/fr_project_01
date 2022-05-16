@@ -5,37 +5,30 @@ import {NavLink} from "react-router-dom";
 const Navbar = () => {
     return (
         <nav className={s.nav}>
-            <div className={s.user_block}>
-                <img className={s.avatar}
-                     src="https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg"
-                     alt=""/>
-                <div className={s.user_name}>
-                    Иванов Иван Иванович
-                </div>
-            </div>
             <div className={s.sitebar}>
-                <div>
-                    <NavLink to='/profile' className={s.item}>Profile</NavLink>
+                <div className={s.item}>
+                    <NavLink to='/profile'
+                             className={s.a}>Profile</NavLink>
                 </div>
-                <div>
+                <div className={s.item}>
                     <NavLink to= {`/dialogs`}
-                             className={s.item}>Messenger</NavLink>
+                             className={s.a}>Messenger</NavLink>
                 </div>
-                <div>
+                <div className={s.item}>
                     <NavLink to='/music'
-                             className={s.item}>Music</NavLink>
+                             className={s.a}>Music</NavLink>
                 </div>
-                <div>
+                <div className={s.item}>
                     <NavLink to='/news'
-                             className={s.item}>News</NavLink>
+                             className={s.a}>News</NavLink>
                 </div>
-                <div>
+                <div className={s.item}>
                     <NavLink to='/settings'
-                             className={s.item}>Settings</NavLink>
+                             className={s.a}>Settings</NavLink>
                 </div>
-                <div>
+                <div className={s.item}>
                     <NavLink to='/users'
-                             className={s.item}>Users</NavLink>
+                             className={s.a}>Users</NavLink>
                 </div>
             </div>
         </nav>

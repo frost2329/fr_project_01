@@ -1,19 +1,31 @@
 import React from 'react';
-import CoverPicture from "./CoverPicture/CoverPicture";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import Loading from "../common/Loading/Loading";
+import s from "./Profile.module.css";
 
 const Profile = (props) => {
-    debugger;
+    if (!props.profileState.profile) return <Loading isLoading={true}/>
     return (
-        <div>
-            <CoverPicture coverPictureState={props.profileState.coverPictureState}/>
-            <div>
-                {!props.profileState.profile
-                    ? <Loading isLoading={true}/>
-                    : <img src={props.profileState.profile.photos.large} alt=""/>}
+        <div className={s.wripper}>
+            <div className={s.narrow_column_wrap}>
+                <div className={s.page_block}>
+                    <div className={s.avatar_img_bloc}>
+                        <img className={s.avatar_img} src={props.profileState.profile.photos.large} alt=""/>
+                    </div>
+                    <div>
+                        Редактировать
+                    </div>
+                </div>
             </div>
-            < MyPostsContainer/>
+            <div className={s.wide_column_wrap}>
+                <div className={s.page_info_block}>
+
+                    <div>{props.profileState.profile.fullName}</div>
+                    <div>{props.profileState.profile.aboutMe}</div>
+                </div>
+                < MyPostsContainer/>
+            </div>
+
 
         </div>
     )

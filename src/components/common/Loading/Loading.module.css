@@ -1,3 +1,6 @@
 .loading img {
     width: 80px;
 }
+.loading {
+    background-color: #edeef0;
+}

@@ -4,22 +4,13 @@
     margin: 0 auto;
 }
 
-.user_block div {
-    margin-bottom: 10px;
-}
-
-.user_block .avatar {
-    width: 100%;
-    height: 200px;
-    border-radius: 5px;
-
-}
-
-.user_block .user_name {
-    font-size: x-large;
-}
-
 .sitebar .item{
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}
+
+.sitebar .item .a{
     text-decoration: none;
     color: black;
 }

@@ -1,22 +1,20 @@
 .my_posts{
-    width: 520px;
-    margin-top: 10px;
 }
+
 .new_post{
-    width: 500px;
     background-color: #ffffff;
     margin-bottom: 10px;
     border-radius: 5px;
     padding: 10px;
 }
 .new_post .input_table {
-    width: 500px;
     border: none;
 }
 
 .posts{
-    width: 520px;
     background-color: #ffffff;
+    padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
+
 }

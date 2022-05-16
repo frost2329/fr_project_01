@@ -1,15 +1,18 @@
 .messenger {
     display: grid;
     grid-template-columns: 1fr 3fr;
+    grid-gap: 10px;
     min-height: 800px;
-    background-color: white;
+
     border-radius: 5px;
 }
 
 .dialogs {
+    background-color: white;
     padding: 10px;
 }
 
 .messages {
+    background-color: white;
     padding: 10px;
 }
