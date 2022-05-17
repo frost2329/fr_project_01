@@ -21,7 +21,8 @@ class UsersContainer extends React.Component {
     onPageNumber = (pageNumber) => {
         this.props.setLoading(true);
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersState.count}&page=${pageNumber}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersState.count}&page=${pageNumber}`,
+            {withCredentials: true})
             .then((response) => {
                 this.props.setLoading(false);
                 this.props.setUsers(response.data.items);
