@@ -1,9 +1,20 @@
 .main_header {
     grid-area: h;
-    background-color: #3a579b;
+    background-color: teal;
 }
-
 .main_header .logo {
     margin-left: 10px;
     width: 40px;
+}
+.auth_block {
+    margin: 9px;
+    float: right;
+}
+.auth_block {
+    margin: 9px;
+    float: right;
+}
+.login {
+    color: white;
+    text-decoration: none;
 }

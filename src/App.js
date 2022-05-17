@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
 import {BrowserRouter, Route} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import {Routes} from "react-router";
 import MessengerContainer from "./components/Messenger/MessengerContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
-const App = (props) => {
+const App = () => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
-                <Header/>
+                <HeaderContainer/>
                 <div className='main_page'>
                     <Navbar/>
                     <div className='main_content'>
