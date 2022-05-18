@@ -10,7 +10,8 @@ import Users from "./Users";
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.setLoading(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersState.count}&page=${this.props.usersState.currentPage}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersState.count}&page=${this.props.usersState.currentPage}`,
+        {withCredentials: true})
             .then((response) => {
                 this.props.setLoading(false);
                 this.props.setUsers(response.data.items);
