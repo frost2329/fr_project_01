@@ -1,35 +1,29 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {
-    follow, setCurrentPage, setLoading,
-    setTotalCount, setUsers, unFollow
-} from "../../redux/users_reduser";
-import * as axios from "axios";
+import {follow, setCurrentPage, setLoading,
+        setTotalCount, setUsers, unFollow} from "../../redux/users_reduser";
 import Users from "./Users";
+import {superAPI} from "../api/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.setLoading(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersState.count}&page=${this.props.usersState.currentPage}`,
-        {withCredentials: true})
+        superAPI.getUsers(this.props.usersState.count, this.props.usersState.currentPage)
             .then((response) => {
                 this.props.setLoading(false);
-                this.props.setUsers(response.data.items);
-                this.props.setTotalCount(response.data.totalCount)
-            });
+                this.props.setUsers(response.items);
+                this.props.setTotalCount(response.totalCount)
+            })
     }
-
     onPageNumber = (pageNumber) => {
         this.props.setLoading(true);
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersState.count}&page=${pageNumber}`,
-            {withCredentials: true})
+        superAPI.getUsers(this.props.usersState.count, pageNumber)
             .then((response) => {
                 this.props.setLoading(false);
                 this.props.setUsers(response.data.items);
             });
     }
-
     render() {
         return (
             <Users usersState={this.props.usersState}

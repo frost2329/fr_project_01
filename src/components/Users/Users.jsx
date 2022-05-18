@@ -17,7 +17,7 @@ const Users = (props) => {
                       props.onPageNumber(pageNumber);
                   }}>
                     {pageNumber}
-                </span>
+            </span>
         )
     })
 
