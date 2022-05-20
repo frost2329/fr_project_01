@@ -1,20 +1,11 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Profile from "./Profile";
-import {setProfile} from "../../redux/profile_reducer";
+import {setProfileTC} from "../../redux/profile_reducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {superAPI} from "../api/api";
 class ProfileContainer extends React.Component {
-
     componentDidMount() {
-        let userId = this.props.router.params.userId
-        if (!userId) {
-            userId = 2
-        }
-        superAPI.getProfile(userId)
-            .then((response) => {
-                this.props.setProfile(response);
-            });
+        this.props.setProfileTC(this.props.router.params.userId ?? 2)
     }
     render() {
         return (
@@ -34,7 +25,6 @@ function withRouter(Component) {
             />
         );
     }
-
     return ComponentWithRouterProp;
 }
 
@@ -45,8 +35,8 @@ let mapStateToProps = (state) => {
 }
 let WithUrlDataProfileContainer = withRouter(ProfileContainer)
 
-let dispachForProps = {
-    setProfile
+let mapDispatchToProps = {
+    setProfileTC:setProfileTC
 }
-export default connect(mapStateToProps, dispachForProps)(WithUrlDataProfileContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(WithUrlDataProfileContainer);
 

@@ -2,7 +2,6 @@ import React from 'react';
 import s from "./User.module.css";
 import user_avatar_img from "../../../images/avatar_user_img.png";
 import {NavLink} from "react-router-dom";
-import {superAPI} from "../../api/api";
 
 const User = (props) => {
     return (
@@ -17,29 +16,13 @@ const User = (props) => {
                 <div>{props.user.name}</div>
                 <div>{props.user.status}</div>
                 <div className={s.u_block_el}>
-                    {props.user.followed
+                    {!props.user.followed
                         ? <button disabled={props.isFollowingInProgress.some(u => u === props.user.id)}
-                                  onClick={() => {
-                                      props.toggleIsFollowingInProgress(true, props.user.id)
-                                      superAPI.unFollow(props.user.id)
-                                          .then((response) => {
-                                              props.toggleIsFollowingInProgress(false, props.user.id)
-                                              if (response.resultCode === 0) {
-                                                  props.unFollow(props.user.id);
-                                              }
-                                          })
-                                  }}>unfollow</button>
+                                  onClick={() => {props.followTC(props.user.id)}}>
+                            unfollow</button>
                         : <button disabled={props.isFollowingInProgress.some(u => u === props.user.id)}
-                                  onClick={() => {
-                                      props.toggleIsFollowingInProgress(true, props.user.id)
-                                      superAPI.follow(props.user.id)
-                                          .then((response) => {
-                                              props.toggleIsFollowingInProgress(false, props.user.id)
-                                              if (response.resultCode === 0) {
-                                                  props.follow(props.user.id);
-                                              }
-                                          })
-                                  }}>follow</button>
+                                  onClick={() => {props.unFollowTC(props.user.id)}}>
+                            follow</button>
                     }
                 </div>
             </div>
