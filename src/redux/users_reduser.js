@@ -3,14 +3,16 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const SET_LOADING = 'SET_LOADING';
+const TOGGLE_IS_LOADING_PAGE = 'TOGGLE_IS_LOADING_PAGE';
+const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'TOGGLE_FOLLOWING_IN_PROGRESS';
 
 let initialState = {
     usersData: [],
     count: 10,
     currentPage: 1,
     totalCount: 0,
-    isLoading: false
+    isLoadingPage: false,
+    isFollowingInProgress: []
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -47,8 +49,14 @@ const usersReducer = (state = initialState, action) => {
             return {...state, totalCount: action.totalCount}
         case SET_CURRENT_PAGE:
             return {...state, currentPage: action.currentPage}
-        case SET_LOADING:
-            return {...state, isLoading: action.isLoading}
+        case TOGGLE_IS_LOADING_PAGE:
+            return {...state, isLoadingPage: action.isLoading}
+        case TOGGLE_IS_FOLLOWING_IN_PROGRESS:
+            return {
+                ...state, isFollowingInProgress: action.isLoading
+                    ? [...state.isFollowingInProgress, action.userId]
+                    : state.isFollowingInProgress.filter(id => id !== action.userId)
+            }
         default:
             return state;
     }
@@ -59,5 +67,11 @@ export const unFollow = (id) => ({type: UNFOLLOW, id: id});
 export const setUsers = (usersData) => ({type: SET_USERS, usersData: usersData});
 export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount: totalCount});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
-export const setLoading = (isLoading) => ({type: SET_LOADING, isLoading: isLoading});
+export const toggleIsLoadingPage = (isLoading) => ({type: TOGGLE_IS_LOADING_PAGE, isLoading: isLoading});
+export const toggleIsFollowingInProgress = (isLoading, userId) => ({
+    type: TOGGLE_IS_FOLLOWING_IN_PROGRESS,
+    isLoading: isLoading,
+    userId: userId
+});
+
 export default usersReducer;

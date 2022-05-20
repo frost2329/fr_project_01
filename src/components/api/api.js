@@ -11,13 +11,13 @@ export const superAPI = {
                 return response.data;
             })
     },
-    unFolow(userId) {
+    unFollow(userId) {
         return instance.delete(`follow/${userId}`)
             .then(response => {
                 return response.data;
             })
     },
-    folow(userId) {
+    follow(userId) {
         return instance.post(`follow/${userId}`)
             .then(response => {
                 return response.data;

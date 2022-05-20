@@ -4,7 +4,6 @@ import User from "./User/User";
 import Loading from "../common/Loading/Loading";
 
 const Users = (props) => {
-
     let pageCount = Math.ceil(/*props.usersState.totalCount;*/300 / props.usersState.count);
     let pageNumberButtonsArray = [];
     for (let i = 1; i <= pageCount; i++) {
@@ -22,8 +21,10 @@ const Users = (props) => {
     })
 
     let usersElemets = props.usersState.usersData.map(user => <User user={user}
+                                                                    isFollowingInProgress={props.usersState.isFollowingInProgress}
                                                                     follow={props.follow}
-                                                                    unFollow={props.unFollow}/>);
+                                                                    unFollow={props.unFollow}
+                                                                    toggleIsFollowingInProgress={props.toggleIsFollowingInProgress}/>);
     return (
         <div className={s.users}>
             <div>
@@ -31,8 +32,8 @@ const Users = (props) => {
             </div>
 
             <div>
-                {props.usersState.isLoading
-                    ? <Loading isLoading={props.usersState.isLoading}/>
+                {props.usersState.isLoadingPage
+                    ? <Loading isLoading={props.usersState.isLoadingPage}/>
                     : (<div>
                             <div>
                                 {usersElemets}

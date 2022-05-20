@@ -18,24 +18,28 @@ const User = (props) => {
                 <div>{props.user.status}</div>
                 <div className={s.u_block_el}>
                     {props.user.followed
-                        ? <button onClick={() => {
-                            superAPI.unFolow(props.user.id)
-                                .then((response) => {
-                                    debugger;
-                                    if (response.resultCode === 0) {
-                                        props.unFollow(props.user.id);
-                                    }
-                                })
-                        }}>unfollow</button>
-                        : <button onClick={() => {
-                            superAPI.folow(props.user.id)
-                                .then((response) => {
-                                    debugger;
-                                    if (response.resultCode === 0) {
-                                        props.follow(props.user.id);
-                                    }
-                                })
-                        }}>follow</button>
+                        ? <button disabled={props.isFollowingInProgress.some(u => u === props.user.id)}
+                                  onClick={() => {
+                                      props.toggleIsFollowingInProgress(true, props.user.id)
+                                      superAPI.unFollow(props.user.id)
+                                          .then((response) => {
+                                              props.toggleIsFollowingInProgress(false, props.user.id)
+                                              if (response.resultCode === 0) {
+                                                  props.unFollow(props.user.id);
+                                              }
+                                          })
+                                  }}>unfollow</button>
+                        : <button disabled={props.isFollowingInProgress.some(u => u === props.user.id)}
+                                  onClick={() => {
+                                      props.toggleIsFollowingInProgress(true, props.user.id)
+                                      superAPI.follow(props.user.id)
+                                          .then((response) => {
+                                              props.toggleIsFollowingInProgress(false, props.user.id)
+                                              if (response.resultCode === 0) {
+                                                  props.follow(props.user.id);
+                                              }
+                                          })
+                                  }}>follow</button>
                     }
                 </div>
             </div>
