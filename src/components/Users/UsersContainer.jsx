@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {followTC, getUsersTC, unFollowTC} from "../../redux/users_reduser";
 import Users from "./Users";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -33,4 +34,6 @@ let mapDispatchToProps = {
     followTC: followTC,
     unFollowTC: unFollowTC
 }
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps)
+)(UsersContainer);
