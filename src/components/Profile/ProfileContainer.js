@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Profile from "./Profile";
-import {setProfileTC} from "../../redux/profile_reducer";
+import {addPostAC, setProfileTC, updateNewPostDataAC} from "../../redux/profile_reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import withRouter from "../../hoc/withRouter";
 import {compose} from "redux";
@@ -12,7 +12,9 @@ class ProfileContainer extends React.Component {
     }
     render() {
         return (
-            <Profile profileState={this.props.profileState}/>
+            <Profile profileState={this.props.profileState}
+                     addPost={this.props.addPost}
+                     updatePostText={this.props.updatePostText}/>
         )
     }
 }
@@ -23,7 +25,9 @@ let mapStateToProps = (state) => {
     }
 }
 let mapDispatchToProps = {
-    setProfileTC:setProfileTC
+    setProfileTC:setProfileTC,
+    addPost: addPostAC,
+    updatePostText: updateNewPostDataAC
 }
 
 export default compose(

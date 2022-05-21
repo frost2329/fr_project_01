@@ -1,10 +1,11 @@
 import React from 'react';
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import Loading from "../common/Loading/Loading";
 import s from "./Profile.module.css";
 import user_avatar_img from "../../images/avatar_user_img.png";
+import MyPosts from "./MyPosts/MyPosts";
 
 const Profile = (props) => {
+    debugger;
     if (!props.profileState.profile) return <Loading isLoading={true}/>
     return (
         <div className={s.wripper}>
@@ -26,7 +27,9 @@ const Profile = (props) => {
                     <div>{props.profileState.profile.fullName}</div>
                     <div>{props.profileState.profile.aboutMe}</div>
                 </div>
-                < MyPostsContainer/>
+                <MyPosts myPostsState = {props.profileState.myPostsState}
+                                        addPost={props.addPost}
+                                        updatePostText={props.updatePostText}/>
             </div>
 
 

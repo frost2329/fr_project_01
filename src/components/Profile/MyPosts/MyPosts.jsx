@@ -3,6 +3,7 @@ import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
+    debugger;
     let postElements = props.myPostsState.postData.map(p => <Post postState={p}/>);
 
     let onAddPost = () => {
