@@ -3,9 +3,9 @@ import Loading from "../common/Loading/Loading";
 import s from "./Profile.module.css";
 import user_avatar_img from "../../images/avatar_user_img.png";
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = (props) => {
-    debugger;
     if (!props.profileState.profile) return <Loading isLoading={true}/>
     return (
         <div className={s.wripper}>
@@ -13,8 +13,8 @@ const Profile = (props) => {
                 <div className={s.page_block}>
                     <div className={s.avatar_img_bloc}>
                         <img className={s.avatar_img} src={props.profileState.profile.photos.large
-                                                            ? props.profileState.profile.photos.large
-                                                            : user_avatar_img} alt=""/>
+                            ? props.profileState.profile.photos.large
+                            : user_avatar_img} alt=""/>
                     </div>
                     <div>
                         Редактировать
@@ -23,16 +23,14 @@ const Profile = (props) => {
             </div>
             <div className={s.wide_column_wrap}>
                 <div className={s.page_info_block}>
-
-                    <div>{props.profileState.profile.fullName}</div>
-                    <div>{props.profileState.profile.aboutMe}</div>
+                    <ProfileInfo fullName={props.profileState.profile.fullName}
+                                 userStatus={props.profileState.userStatus}
+                                 updatetUserStatusTC={props.updatetUserStatusTC}/>
                 </div>
-                <MyPosts myPostsState = {props.profileState.myPostsState}
-                                        addPost={props.addPost}
-                                        updatePostText={props.updatePostText}/>
+                <MyPosts myPostsState={props.profileState.myPostsState}
+                         addPost={props.addPost}
+                         updatePostText={props.updatePostText}/>
             </div>
-
-
         </div>
     )
 }

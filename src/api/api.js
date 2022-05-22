@@ -9,7 +9,6 @@ export const superAPI = {
         return instance
             .get(`users?count=${sizePage}&page=${currentPage}`)
             .then(response => {
-                debugger;
                 return response.data;
             })
     },
@@ -43,6 +42,21 @@ export const profileAPI = {
         return instance
             .get(`profile/${userId}`)
             .then(response => {
+                return response.data;
+            })
+    },
+    getStatus(userId) {
+        return instance
+            .get(`profile/status/${userId}`)
+            .then(response => {
+                return response.data;
+            })
+    },
+    updateStatus(status) {
+        return instance
+            .put(`profile/status`, {status: status})
+            .then(response => {
+                debugger;
                 return response.data;
             })
     }

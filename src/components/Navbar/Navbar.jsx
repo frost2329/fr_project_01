@@ -15,18 +15,6 @@ const Navbar = () => {
                              className={s.a}>Messenger</NavLink>
                 </div>
                 <div className={s.item}>
-                    <NavLink to='/music'
-                             className={s.a}>Music</NavLink>
-                </div>
-                <div className={s.item}>
-                    <NavLink to='/news'
-                             className={s.a}>News</NavLink>
-                </div>
-                <div className={s.item}>
-                    <NavLink to='/settings'
-                             className={s.a}>Settings</NavLink>
-                </div>
-                <div className={s.item}>
                     <NavLink to='/users'
                              className={s.a}>Users</NavLink>
                 </div>

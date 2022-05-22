@@ -3,9 +3,11 @@ import {profileAPI} from "../api/api";
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_DATA = 'UPDATE_NEW_POST_DATA';
 const SET_PROFILE = 'SET_PROFILE';
+const SET_USER_STATUS = 'SET_USER_STATUS';
 
 let initialState = {
     profile: null,
+    userStatus: null,
     myPostsState: {
         postData: [
             {
@@ -38,13 +40,11 @@ let initialState = {
             post_author_name: 'Иванов Иван Иванович'
         }
 
-    },
-    coverPictureState: {
-        img_url: 'https://triptales.ru/wp-content/uploads/2020/05/vpechatlyayuschie-panoramy-krupneyshih-gorodov-mira.jpg'
     }
 }
 
 const profileReducer = (state = initialState, action) => {
+    debugger;
     switch (action.type) {
         case ADD_POST:
             return {
@@ -67,6 +67,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.profile
                 }
+        case SET_USER_STATUS:
+            return {
+                ...state,
+                userStatus: action.userStatus
+                }
         default:
             return state;
     }
@@ -75,12 +80,33 @@ const profileReducer = (state = initialState, action) => {
 export const addPostAC = () => ({type: ADD_POST})
 export const updateNewPostDataAC = (post_text) => ({type: UPDATE_NEW_POST_DATA, post_text: post_text})
 export const setProfileAC = (profile) => ({type: SET_PROFILE, profile: profile})
+export const setUserStatusAC = (userStatus) => ({type: SET_USER_STATUS, userStatus: userStatus})
 
-export const setProfileTC = (userId) => {
+export const getUserProfileTC = (userId) => {
     return (dispatch) => {
         profileAPI.getProfile(userId)
             .then((response) => {
                 dispatch(setProfileAC(response));
+            });
+    }
+}
+export const getUserStatusTC = (userId) => {
+    return (dispatch) => {
+        profileAPI.getStatus(userId)
+            .then((data) => {
+                dispatch(setUserStatusAC(data));
+            });
+    }
+}
+export const updatetUserStatusTC = (status) => {
+    return (dispatch) => {
+        console.log(status);
+        profileAPI.updateStatus(status)
+            .then((data) => {
+                debugger;
+                if (data.resultCode === 0) {
+                    dispatch(setUserStatusAC(status));
+                }
             });
     }
 }
