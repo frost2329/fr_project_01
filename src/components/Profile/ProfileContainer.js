@@ -6,7 +6,7 @@ import {
     getUserProfileTC,
     getUserStatusTC,
     updateNewPostDataAC,
-    updatetUserStatusTC
+    updateUserStatusTC
 } from "../../redux/profile_reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import withRouter from "../../hoc/withRouter";
@@ -23,7 +23,7 @@ class ProfileContainer extends React.Component {
             <Profile profileState={this.props.profileState}
                      addPost={this.props.addPost}
                      updatePostText={this.props.updatePostText}
-                     updatetUserStatusTC={this.props.updatetUserStatusTC}
+                     updateUserStatusTC={this.props.updateUserStatusTC}
             />
         )
     }
@@ -40,7 +40,7 @@ let mapDispatchToProps = {
     addPost: addPostAC,
     updatePostText: updateNewPostDataAC,
     getUserStatusTC: getUserStatusTC,
-    updatetUserStatusTC: updatetUserStatusTC
+    updateUserStatusTC: updateUserStatusTC
 
 }
 

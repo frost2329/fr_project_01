@@ -3,19 +3,30 @@ import React from 'react';
 
 class ProfileStatus extends React.Component {
     state = {
-        editMode: false
+        editMode: false,
+        userStatus: this.props.userStatus
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.userStatus !== this.props.userStatus) {
+            this.setState(
+                {userStatus:this.props.userStatus}
+            )
+        }
     }
     toggleEditMode = (toggle) => {
         this.setState({
             editMode: toggle,
-            userStatus: this.props.userStatus
         })
+        if(!toggle && this.props.userStatus !== this.state.userStatus) {
+            this.props.updateUserStatusTC(this.state.userStatus)
+        }
     }
     onStatusChange = (e) => {
         this.setState({
             userStatus: e.target.value
         })
     }
+
     render() {
         return (
             <div>
@@ -30,11 +41,7 @@ class ProfileStatus extends React.Component {
                     <div>
                         <input autoFocus={true}
                                onChange={this.onStatusChange}
-                               onBlur={() => {
-                                   debugger;
-                                   this.toggleEditMode(false);
-                                   this.props.updatetUserStatusTC(this.state.userStatus)
-                               }}
+                               onBlur={() => {this.toggleEditMode(false)}}
                                type="text"
                                value={this.state.userStatus}
                         />

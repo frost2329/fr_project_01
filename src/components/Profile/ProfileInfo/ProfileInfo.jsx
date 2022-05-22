@@ -8,7 +8,7 @@ const  ProfileInfo = (props) => {
             <div className={s.user_name}>{props.fullName}</div>
             <div>
                 <ProfileStatus userStatus={props.userStatus}
-                               updatetUserStatusTC={props.updatetUserStatusTC}/>
+                               updateUserStatusTC={props.updateUserStatusTC}/>
             </div>
         </div>
     );

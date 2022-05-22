@@ -7,7 +7,7 @@ const SET_USER_STATUS = 'SET_USER_STATUS';
 
 let initialState = {
     profile: null,
-    userStatus: null,
+    userStatus: '',
     myPostsState: {
         postData: [
             {
@@ -44,7 +44,6 @@ let initialState = {
 }
 
 const profileReducer = (state = initialState, action) => {
-    debugger;
     switch (action.type) {
         case ADD_POST:
             return {
@@ -98,12 +97,11 @@ export const getUserStatusTC = (userId) => {
             });
     }
 }
-export const updatetUserStatusTC = (status) => {
+export const updateUserStatusTC = (status) => {
     return (dispatch) => {
         console.log(status);
         profileAPI.updateStatus(status)
             .then((data) => {
-                debugger;
                 if (data.resultCode === 0) {
                     dispatch(setUserStatusAC(status));
                 }

@@ -56,7 +56,6 @@ export const profileAPI = {
         return instance
             .put(`profile/status`, {status: status})
             .then(response => {
-                debugger;
                 return response.data;
             })
     }

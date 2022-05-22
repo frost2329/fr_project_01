@@ -25,7 +25,7 @@ const Profile = (props) => {
                 <div className={s.page_info_block}>
                     <ProfileInfo fullName={props.profileState.profile.fullName}
                                  userStatus={props.profileState.userStatus}
-                                 updatetUserStatusTC={props.updatetUserStatusTC}/>
+                                 updateUserStatusTC={props.updateUserStatusTC}/>
                 </div>
                 <MyPosts myPostsState={props.profileState.myPostsState}
                          addPost={props.addPost}
