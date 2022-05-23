@@ -10,11 +10,10 @@
     margin: 9px;
     float: right;
 }
-.auth_block {
-    margin: 9px;
-    float: right;
-}
 .login {
     color: white;
     text-decoration: none;
+}
+.logout{
+    float: right;
 }

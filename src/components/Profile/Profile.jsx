@@ -28,8 +28,7 @@ const Profile = (props) => {
                                  updateUserStatusTC={props.updateUserStatusTC}/>
                 </div>
                 <MyPosts myPostsState={props.profileState.myPostsState}
-                         addPost={props.addPost}
-                         updatePostText={props.updatePostText}/>
+                         addPostAC={props.addPostAC}/>
             </div>
         </div>
     )

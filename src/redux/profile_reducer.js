@@ -1,7 +1,6 @@
 import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD_POST';
-const UPDATE_NEW_POST_DATA = 'UPDATE_NEW_POST_DATA';
 const SET_PROFILE = 'SET_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 
@@ -49,18 +48,15 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 myPostsState: {
-                    postData: [state.myPostsState.newPostData, ...state.myPostsState.postData],
-                    newPostData: {...state.myPostsState.newPostData, post_text: ''}
+                    postData: [{
+                        id: 5,
+                        post_text: action.post_text,
+                        img_url: 'https://gazetaingush.ru/sites/default/files/pubs/obshchestvo/2021/05/priroda-ingushetii-1200x5401.jpg',
+                        avatar_img_url: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg',
+                        post_author_name: 'Иванов Иван Иванович'
+                    }, ...state.myPostsState.postData]
                 }
-            };
-        case UPDATE_NEW_POST_DATA:
-            return {
-                ...state,
-                myPostsState: {
-                    ...state.myPostsState,
-                    newPostData: {...state.myPostsState.newPostData, post_text: action.post_text}
-                }
-            };
+            }
         case SET_PROFILE:
             return {
                 ...state,
@@ -76,8 +72,7 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPostAC = () => ({type: ADD_POST})
-export const updateNewPostDataAC = (post_text) => ({type: UPDATE_NEW_POST_DATA, post_text: post_text})
+export const addPostAC = (post_text) => ({type: ADD_POST, post_text: post_text})
 export const setProfileAC = (profile) => ({type: SET_PROFILE, profile: profile})
 export const setUserStatusAC = (userStatus) => ({type: SET_USER_STATUS, userStatus: userStatus})
 

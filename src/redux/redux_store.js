@@ -4,12 +4,14 @@ import profileReducer from "./profile_reducer";
 import usersReducer from "./users_reduser";
 import authReducer from "./auth_reduser";
 import thunkMiddleware from 'redux-thunk';
+import {reducer as formReducer} from 'redux-form';
 
 let reducers = combineReducers({
     profileState: profileReducer,
     messengerState: messengerReducer,
     usersState: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));

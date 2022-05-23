@@ -1,5 +1,4 @@
 const ADD_MESSAGE = 'ADD_MESSAGE';
-const UPDATE_NEW_MESSAGE_DATA = 'UPDATE_NEW_MESSAGE_DATA';
 
 let initialState = {
     dialogData: [
@@ -13,12 +12,6 @@ let initialState = {
         {message_id: 3, dialog_id: 1, user_id:1, message_text: 'Where are you?'},
         {message_id: 4, dialog_id: 1, user_id:1, message_text: 'Are you ok??'}
     ],
-    newMessageData: {
-        message_id: 5,
-        dialog_id: 1,
-        user_id: 1,
-        message_text: ''
-    }
 }
 
 const messengerReducer = (state = initialState, action) => {
@@ -26,25 +19,21 @@ const messengerReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             return {
                 ...state,
-                messageData: [...state.messageData, state.newMessageData],
-                newMessageData: {...state.newMessageData, message_text: ''}
-            };
-        case UPDATE_NEW_MESSAGE_DATA:
-            return {
-                ...state,
-                newMessageData: {...state.newMessageData, message_text: action.message_text}
+                messageData: [
+                    ...state.messageData,
+                    {message_id: 5, dialog_id: 1, user_id:1, message_text: action.message}
+                ],
             }
         default: return state;
     }
 }
 
-export const addMessageAC = () => ({
-    type: ADD_MESSAGE
-})
-export const updateNewMessageDataAC = (message_text) => ({
-    type: UPDATE_NEW_MESSAGE_DATA,
-    message_text: message_text
+export const addMessageAC = (message) => {
+    return {
+        type: ADD_MESSAGE,
+        message: message
+    }
 
-})
+}
 
 export default messengerReducer;
