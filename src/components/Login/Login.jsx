@@ -3,6 +3,10 @@ import {Field, reduxForm} from "redux-form";
 import {Input} from "../common/FormControls/FormControls";
 import {required} from "../../utils/validators";
 import s from "./Login.module.css";
+import {loginTC} from "../../redux/auth_reduser";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {Navigate} from "react-router";
 
 const LoginForm = (props) => {
     return (
@@ -32,19 +36,30 @@ const LoginForm = (props) => {
         </form>
     )
 }
-
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 const Login = (props) => {
+    if (props.auth.isAuth) {
+        return <Navigate to='/profile'/>
+    }
     return (
         <div>
             <LoginReduxForm onSubmit={(formData) => {
                 props.loginTC(formData)
-                console.log(formData)
             }}/>
         </div>
     )
 }
 
+let mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+let mapDispatchToProps = {
+    loginTC: loginTC
+}
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps)
+)(Login);
 
-export default Login;

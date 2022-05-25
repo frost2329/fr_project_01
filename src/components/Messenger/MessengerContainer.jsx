@@ -1,7 +1,7 @@
 import Messenger from "./Messenger";
 import {connect} from "react-redux";
 import {addMessageAC} from "../../redux/messenger_reducer";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 let mapStateToProps = (state) => {

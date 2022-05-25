@@ -32,7 +32,7 @@ const authReducer = (state = initialState, action) => {
 export const setUserAuthDataAC = (userId, email, login, isAuth ) => ({type: SET_USER_AUTH_DATA, authData: {userId, email, login, isAuth}});
 export const authTC = () => {
     return (dispatch) => {
-        authAPI.auth()
+        return authAPI.auth()
             .then((data) => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;

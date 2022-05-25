@@ -7,7 +7,7 @@ import {
     getUserStatusTC,
     updateUserStatusTC
 } from "../../redux/profile_reducer";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 import withRouter from "../../hoc/withRouter";
 import {compose} from "redux";
 
@@ -42,8 +42,8 @@ let mapDispatchToProps = {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withRouter,
-    withAuthRedirect
+    withAuthRedirect,
+    withRouter
 )(ProfileContainer);
 
 

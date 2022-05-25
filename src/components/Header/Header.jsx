@@ -2,6 +2,9 @@ import React from 'react';
 import s from "./Header.module.css";
 import logo from "./logo.png";
 import {NavLink} from "react-router-dom";
+import {authTC, logoutTC} from "../../redux/auth_reduser";
+import {compose} from "redux";
+import {connect} from "react-redux";
 
 const Header = (props) => {
     return (
@@ -20,4 +23,14 @@ const Header = (props) => {
     );
 }
 
-export default Header;
+let mapStateToProps = (state) => {
+    return {
+        userLogin: state.auth.userLogin,
+        isAuth: state.auth.isAuth
+    }
+}
+let mapDispatchToProps = {authTC: authTC, logoutTC: logoutTC}
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+)(Header);
