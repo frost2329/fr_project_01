@@ -3,12 +3,20 @@ import s from "./Messenger.module.css";
 import Dialog from "./Dialog/Dialog";
 import Message from "./Massage/Message";
 import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../common/FormControls/FormControls";
+import {maxLengthCreator} from "../../utils/validators";
+
+const maxLength = maxLengthCreator(50);
 
 const NewMessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeHolder={"new message"}  name={"newMessage"} component={"textarea"}/>
+                <Field placeHolder={"new message"}
+                       name={'newMessage'}
+                       component={Textarea}
+                       validate={[maxLength]}
+                />
             </div>
             <div>
                 <button>Send</button>

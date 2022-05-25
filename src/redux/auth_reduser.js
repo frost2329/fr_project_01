@@ -22,21 +22,20 @@ const authReducer = (state = initialState, action) => {
                     userId: action.authData.userId,
                     userEmail: action.authData.email,
                     userLogin: action.authData.login,
-                    isAuth: true
+                    isAuth: action.authData.isAuth
             }
         default:
             return state;
     }
 }
-export const setUserAuthDataAC = (userId, email, login ) => ({type: SET_USER_AUTH_DATA, authData: {userId, email, login}});
-export const setAuthAC = (isAuth) => ({type: SET_AUTH, isAuth: isAuth});
+export const setUserAuthDataAC = (userId, email, login, isAuth ) => ({type: SET_USER_AUTH_DATA, authData: {userId, email, login, isAuth}});
 export const authTC = () => {
     return (dispatch) => {
         authAPI.auth()
             .then((response) => {
                 if (response.resultCode === 0) {
                     let {id, email, login} = response.data;
-                    dispatch(setUserAuthDataAC(id, email, login));
+                    dispatch(setUserAuthDataAC(id, email, login, true));
                 }
             });
     }
@@ -47,8 +46,8 @@ export const loginTC = (loginData) => {
         authAPI.login(loginData)
             .then((response) => {
                 if (response.resultCode === 0) {
-                    console.log(response)
-                    dispatch(setAuthAC(true));
+                    dispatch(authTC());
+
                 }
             });
     }
@@ -58,8 +57,7 @@ export const logoutTC = () => {
         authAPI.logout()
             .then((response) => {
                 if (response.resultCode === 0) {
-                    console.log(response)
-                    dispatch(setAuthAC(false));
+                    dispatch(setUserAuthDataAC(null, null, null, false));
                 }
             });
     }
