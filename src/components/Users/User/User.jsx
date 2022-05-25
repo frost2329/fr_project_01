@@ -19,10 +19,10 @@ const User = (props) => {
                     {!props.user.followed
                         ? <button disabled={props.isFollowingInProgress.some(u => u === props.user.id)}
                                   onClick={() => {props.followTC(props.user.id)}}>
-                            unfollow</button>
+                            follow</button>
                         : <button disabled={props.isFollowingInProgress.some(u => u === props.user.id)}
                                   onClick={() => {props.unFollowTC(props.user.id)}}>
-                            follow</button>
+                            unfollow</button>
                     }
                 </div>
             </div>

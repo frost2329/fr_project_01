@@ -79,8 +79,8 @@ export const setUserStatusAC = (userStatus) => ({type: SET_USER_STATUS, userStat
 export const getUserProfileTC = (userId) => {
     return (dispatch) => {
         profileAPI.getProfile(userId)
-            .then((response) => {
-                dispatch(setProfileAC(response));
+            .then((data) => {
+                dispatch(setProfileAC(data));
             });
     }
 }

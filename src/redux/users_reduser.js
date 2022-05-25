@@ -1,4 +1,4 @@
-import {superAPI} from "../api/api";
+import {userAPI} from "../api/api";
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -75,21 +75,21 @@ export const getUsersTC = (sizePage, currentPage) => {
     return (dispatch) => {
         dispatch(toggleIsLoadingPageAC(true));
         dispatch(setCurrentPageAC(currentPage));
-        superAPI.getUsers(sizePage, currentPage)
-            .then((response) => {
+        userAPI.getUsers(sizePage, currentPage)
+            .then((data) => {
                 dispatch(toggleIsLoadingPageAC(false));
-                dispatch(setUsersAC(response.items));
-                dispatch(setTotalCountAC(response.totalCount));
+                dispatch(setUsersAC(data.items));
+                dispatch(setTotalCountAC(data.totalCount));
             })
     }
 }
 export const followTC = (userId) => {
     return (dispatch) => {
         dispatch(toggleIsFollowingInProgressAC(true, userId))
-        superAPI.follow(userId)
-            .then((response) => {
+        userAPI.follow(userId)
+            .then((data) => {
                 dispatch(toggleIsFollowingInProgressAC(false, userId))
-                if (response.resultCode === 0) {
+                if (data.resultCode === 0) {
                     dispatch(followAC(userId));
                 }
             })
@@ -99,10 +99,10 @@ export const followTC = (userId) => {
 export const unFollowTC = (userId) => {
     return (dispatch) => {
         dispatch(toggleIsFollowingInProgressAC(true, userId))
-        superAPI.unFollow(userId)
-            .then((response) => {
+        userAPI.unFollow(userId)
+            .then((data) => {
                 dispatch(toggleIsFollowingInProgressAC(false, userId))
-                if (response.resultCode === 0) {
+                if (data.resultCode === 0) {
                     dispatch(unFollowAC(userId));
                 }
             })

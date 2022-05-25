@@ -4,7 +4,7 @@ const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {'API-KEY': 'c3a5ce8f-4dee-4c48-90c8-4b68b3dab507'}
 })
-export const superAPI = {
+export const userAPI = {
     getUsers(sizePage= 10, currentPage= 1) {
         return instance
             .get(`users?count=${sizePage}&page=${currentPage}`)
@@ -38,7 +38,7 @@ export const authAPI = {
     login(loginData) {
         return instance
             .post(`auth/login`, {
-                email: loginData.login,
+                email: loginData.email,
                 password: loginData.password,
                 rememberMe: loginData.rememberMe,
                 captcha: true

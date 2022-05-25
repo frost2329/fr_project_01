@@ -1,4 +1,5 @@
 import {authAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_AUTH_DATA = 'SET_USER_AUTH_DATA';
 const SET_AUTH = 'SET_AUTH';
@@ -32,9 +33,9 @@ export const setUserAuthDataAC = (userId, email, login, isAuth ) => ({type: SET_
 export const authTC = () => {
     return (dispatch) => {
         authAPI.auth()
-            .then((response) => {
-                if (response.resultCode === 0) {
-                    let {id, email, login} = response.data;
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    let {id, email, login} = data.data;
                     dispatch(setUserAuthDataAC(id, email, login, true));
                 }
             });
@@ -44,10 +45,12 @@ export const authTC = () => {
 export const loginTC = (loginData) => {
     return (dispatch) => {
         authAPI.login(loginData)
-            .then((response) => {
-                if (response.resultCode === 0) {
+            .then((data) => {
+                if (data.resultCode === 0) {
                     dispatch(authTC());
-
+                }else {
+                    let message = data.messages.length > 0 ? data.messages[0] : 'Some error'
+                    dispatch(stopSubmit('login', {_error: message}))
                 }
             });
     }
@@ -55,8 +58,8 @@ export const loginTC = (loginData) => {
 export const logoutTC = () => {
     return (dispatch) => {
         authAPI.logout()
-            .then((response) => {
-                if (response.resultCode === 0) {
+            .then((data) => {
+                if (data.resultCode === 0) {
                     dispatch(setUserAuthDataAC(null, null, null, false));
                 }
             });
