@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 import {authTC, logoutTC} from "../../redux/auth_reduser";
 import {compose} from "redux";
 import {connect} from "react-redux";
+import {getIsAuth, getUserLogin} from "../../redux/auth_selectors";
 
 const Header = (props) => {
     return (
@@ -25,8 +26,8 @@ const Header = (props) => {
 
 let mapStateToProps = (state) => {
     return {
-        userLogin: state.auth.userLogin,
-        isAuth: state.auth.isAuth
+        userLogin: getUserLogin(state),
+        isAuth: getIsAuth(state)
     }
 }
 let mapDispatchToProps = {authTC: authTC, logoutTC: logoutTC}

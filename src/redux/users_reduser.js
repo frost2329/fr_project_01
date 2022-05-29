@@ -8,7 +8,7 @@ const TOGGLE_IS_LOADING_PAGE = 'TOGGLE_IS_LOADING_PAGE';
 const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'TOGGLE_FOLLOWING_IN_PROGRESS';
 
 let initialState = {
-    usersData: [],
+    users: [],
     sizePage: 10,
     currentPage: 1,
     totalCount: 0,
@@ -21,7 +21,7 @@ const usersReducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                usersData: state.usersData.map(u => {
+                users: state.users.map(u => {
                     if (u.id === action.id) {
                         return {
                             ...u,
@@ -34,7 +34,7 @@ const usersReducer = (state = initialState, action) => {
         case UNFOLLOW:
             return {
                 ...state,
-                usersData: state.usersData.map(u => {
+                users: state.users.map(u => {
                     if (u.id === action.id) {
                         return {
                             ...u,
@@ -45,7 +45,7 @@ const usersReducer = (state = initialState, action) => {
                 })
             }
         case SET_USERS:
-            return {...state, usersData: action.usersData}
+            return {...state, users: action.users}
         case SET_TOTAL_COUNT:
             return {...state, totalCount: action.totalCount}
         case SET_CURRENT_PAGE:
@@ -65,7 +65,7 @@ const usersReducer = (state = initialState, action) => {
 
 export const followAC = (id) => ({type: FOLLOW, id: id});
 export const unFollowAC = (id) => ({type: UNFOLLOW, id: id});
-export const setUsersAC = (usersData) => ({type: SET_USERS, usersData: usersData});
+export const setUsersAC = (users) => ({type: SET_USERS, users: users});
 export const setTotalCountAC = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount: totalCount});
 export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
 export const toggleIsLoadingPageAC = (isLoading) => ({type: TOGGLE_IS_LOADING_PAGE, isLoading: isLoading});

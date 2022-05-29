@@ -7,6 +7,7 @@ import {loginTC} from "../../redux/auth_reduser";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {Navigate} from "react-router";
+import {getIsAuth} from "../../redux/auth_selectors";
 
 const LoginForm = (props) => {
     return (
@@ -39,7 +40,7 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 const Login = (props) => {
-    if (props.auth.isAuth) {
+    if (props.isAuth) {
         return <Navigate to='/profile'/>
     }
     return (
@@ -53,7 +54,7 @@ const Login = (props) => {
 
 let mapStateToProps = (state) => {
     return {
-        auth: state.auth
+        isAuth: getIsAuth(state)
     }
 }
 let mapDispatchToProps = {

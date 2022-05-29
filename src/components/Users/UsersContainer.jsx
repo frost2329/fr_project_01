@@ -3,19 +3,33 @@ import {connect} from "react-redux";
 import {followTC, getUsersTC, unFollowTC} from "../../redux/users_reduser";
 import Users from "./Users";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getIsFollowingInProgress,
+    getIsLoadingPage,
+    getSizePage,
+    getTotalCount,
+    getUsers
+} from "../../redux/users_selectors";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.getUsersTC(this.props.usersState.sizePage, this.props.usersState.currentPage)
+        debugger;
+        this.props.getUsersTC(this.props.sizePage, this.props.currentPage)
     }
 
     onPageNumber = (pageNumber) => {
-        this.props.getUsersTC(this.props.usersState.sizePage, pageNumber)
+        this.props.getUsersTC(this.props.sizePage, pageNumber)
     }
 
     render() {
         return (
-            <Users usersState={this.props.usersState}
+            <Users users={this.props.users}
+                   sizePage={this.props.sizePage}
+                   currentPage={this.props.currentPage}
+                   totalCount={this.props.totalCount}
+                   isLoadingPage={this.props.isLoadingPage}
+                   isFollowingInProgress={this.props.isFollowingInProgress}
                    onPageNumber={this.onPageNumber}
                    followTC={this.props.followTC}
                    unFollowTC={this.props.unFollowTC}/>
@@ -25,7 +39,12 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        usersState: state.usersState
+        users: getUsers(state),
+        sizePage: getSizePage(state),
+        currentPage: getCurrentPage(state),
+        totalCount: getTotalCount(state),
+        isLoadingPage: getIsLoadingPage(state),
+        isFollowingInProgress: getIsFollowingInProgress(state)
     }
 }
 

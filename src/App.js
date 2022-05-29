@@ -11,6 +11,7 @@ import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializationTC} from "./redux/app_reducer";
 import Loading from "./components/common/Loading/Loading";
+import {getInitialized} from "./redux/app_selectors";
 
 
 
@@ -20,7 +21,7 @@ class App extends React.Component {
     }
 
     render() {
-        if (!this.props.appState.initialized) {return <Loading isLoading={true} />}
+        if (!this.props.initialized) {return <Loading isLoading={true} />}
         return (
             <BrowserRouter>
                 <div className="app-wrapper">
@@ -44,7 +45,7 @@ class App extends React.Component {
 }
 let mapStateToProps = (state) => {
     return {
-        appState: state.appState,
+        initialized: getInitialized(state)
     }
 }
 let mapDispatchToProps = {

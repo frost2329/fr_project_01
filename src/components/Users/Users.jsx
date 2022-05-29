@@ -4,14 +4,15 @@ import User from "./User/User";
 import Loading from "../common/Loading/Loading";
 
 const Users = (props) => {
-    let pageCount = Math.ceil(/*props.usersState.totalCount;*/300 / props.usersState.sizePage);
+    debugger;
+    let pageCount = Math.ceil(/*props.totalCount;*/300 / props.sizePage);
     let pageNumberButtonsArray = [];
     for (let i = 1; i <= pageCount; i++) {
         pageNumberButtonsArray.push(i);
     }
     pageNumberButtonsArray = pageNumberButtonsArray.map((pageNumber) => {
         return (
-            <span className={props.usersState.currentPage === pageNumber ? s.currentPageNumber : s.pageNumber}
+            <span className={props.currentPage === pageNumber ? s.currentPageNumber : s.pageNumber}
                   onClick={() => {
                       props.onPageNumber(pageNumber);
                   }}>
@@ -20,18 +21,18 @@ const Users = (props) => {
         )
     })
 
-    let usersElemets = props.usersState.usersData.map(user => <User user={user}
-                                                                    isFollowingInProgress={props.usersState.isFollowingInProgress}
-                                                                    followTC={props.followTC}
-                                                                    unFollowTC={props.unFollowTC}/>);
+    let usersElemets = props.users.map(user => <User user={user}
+                                                     isFollowingInProgress={props.isFollowingInProgress}
+                                                     followTC={props.followTC}
+                                                     unFollowTC={props.unFollowTC}/>);
     return (
         <div className={s.users}>
             <div>
                 {pageNumberButtonsArray}
             </div>
             <div>
-                {props.usersState.isLoadingPage
-                    ? <Loading isLoading={props.usersState.isLoadingPage}/>
+                {props.isLoadingPage
+                    ? <Loading isLoading={props.isLoadingPage}/>
                     : (<div>{usersElemets}</div>)
                 }
             </div>

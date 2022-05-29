@@ -1,12 +1,12 @@
 const ADD_MESSAGE = 'ADD_MESSAGE';
 
 let initialState = {
-    dialogData: [
+    dialogs: [
         {id: 1, name: 'Ben'},
         {id: 2, name: 'Anna'},
         {id: 3, name: 'Sofia'}
     ],
-    messageData: [
+    messages: [
         {message_id: 1, dialog_id: 1, user_id:1, message_text: 'Hi'},
         {message_id: 2, dialog_id: 1, user_id:1, message_text: 'How are you?'},
         {message_id: 3, dialog_id: 1, user_id:1, message_text: 'Where are you?'},
@@ -19,8 +19,8 @@ const messengerReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             return {
                 ...state,
-                messageData: [
-                    ...state.messageData,
+                messages: [
+                    ...state.messages,
                     {message_id: 5, dialog_id: 1, user_id:1, message_text: action.message}
                 ],
             }
@@ -33,7 +33,6 @@ export const addMessageAC = (message) => {
         type: ADD_MESSAGE,
         message: message
     }
-
 }
 
 export default messengerReducer;

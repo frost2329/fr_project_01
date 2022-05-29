@@ -28,7 +28,7 @@ const NewPostForm = (props) => {
 const NewPostReduxForm = reduxForm({form:'newPost'})(NewPostForm)
 
 const MyPosts = (props) => {
-    let postElements = props.myPostsState.postData.map(p => <Post postState={p}/>);
+    let postElements = props.posts.map(p => <Post postState={p}/>);
 
     return (
         <div className={s.my_posts}>

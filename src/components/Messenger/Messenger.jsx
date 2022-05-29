@@ -28,8 +28,8 @@ const NewMessageForm = (props) => {
 const NewMessageReduxForm = reduxForm({form:'newMessage'})(NewMessageForm)
 
 const  Messenger = (props) => {
-    let dialogElements = props.messengerState.dialogData.map( d => <Dialog id={d.id} name={d.name}/> )
-    let messageElements = props.messengerState.messageData.map( m => <Message massage_text={m.message_text}/> )
+    let dialogElements = props.dialogs.map( d => <Dialog id={d.id} name={d.name}/> )
+    let messageElements = props.messages.map( m => <Message massage_text={m.message_text}/> )
 
     return (
         <div className={s.messenger}>
