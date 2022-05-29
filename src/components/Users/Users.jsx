@@ -4,7 +4,6 @@ import User from "./User/User";
 import Loading from "../common/Loading/Loading";
 
 const Users = (props) => {
-    debugger;
     let pageCount = Math.ceil(/*props.totalCount;*/300 / props.sizePage);
     let pageNumberButtonsArray = [];
     for (let i = 1; i <= pageCount; i++) {
