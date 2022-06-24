@@ -19,7 +19,6 @@ const ProfileStatus = (props) => {
     let onStatusChange = (e) => {
         setStatus(e.target.value)
     }
-    debugger;
     return (
         <div>
             {!editMode &&
