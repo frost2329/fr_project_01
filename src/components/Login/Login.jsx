@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, reduxForm} from "redux-form";
-import {Input} from "../common/FormControls/FormControls";
+import {Input, InputPassword} from "../common/FormControls/FormControls";
 import {required} from "../../utils/validators";
 import s from "./Login.module.css";
 import {loginTC} from "../../redux/auth_reduser";
@@ -24,7 +24,7 @@ const LoginForm = (props) => {
             <div>
                 <Field placeHolder={"Password"}
                        name={"password"}
-                       component={Input}
+                       component={InputPassword}
                        validate={required}
                 />
             </div>
