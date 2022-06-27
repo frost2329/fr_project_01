@@ -1,8 +1,8 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-const SET_USER_AUTH_DATA = 'SET_USER_AUTH_DATA';
-const SET_AUTH = 'SET_AUTH';
+const SET_USER_AUTH_DATA = 'auth_reducer/SET_USER_AUTH_DATA';
+const SET_AUTH = 'auth_reducer/SET_AUTH';
 
 
 let initialState = {

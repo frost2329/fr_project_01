@@ -1,0 +1,9 @@
+.currentPageNumber {
+    font-weight: bold;
+    padding: 5px;
+    color: #3a579b;
+}
+
+.pageNumber {
+    padding: 5px;
+}

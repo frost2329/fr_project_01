@@ -2,7 +2,7 @@ import React from 'react';
 import s from "./Header.module.css";
 import logo from "./logo.png";
 import {NavLink} from "react-router-dom";
-import {authTC, logoutTC} from "../../redux/auth_reduser";
+import {authTC, logoutTC} from "../../redux/auth_reducer";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {getIsAuth, getUserLogin} from "../../redux/auth_selectors";

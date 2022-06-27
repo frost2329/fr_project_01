@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {followTC, getUsersTC, unFollowTC} from "../../redux/users_reduser";
+import {followTC, getUsersTC, unFollowTC} from "../../redux/users_reducer";
 import Users from "./Users";
 import {compose} from "redux";
 import {

@@ -1,25 +1,10 @@
 import React from 'react';
 import s from "./Users.module.css";
-import User from "./User/User";
+import User from "./User";
 import Loading from "../common/Loading/Loading";
+import Paginator from "../common/Paginator/Paginator";
 
 const Users = (props) => {
-    let pageCount = Math.ceil(/*props.totalCount;*/300 / props.sizePage);
-    let pageNumberButtonsArray = [];
-    for (let i = 1; i <= pageCount; i++) {
-        pageNumberButtonsArray.push(i);
-    }
-    pageNumberButtonsArray = pageNumberButtonsArray.map((pageNumber) => {
-        return (
-            <span className={props.currentPage === pageNumber ? s.currentPageNumber : s.pageNumber}
-                  onClick={() => {
-                      props.onPageNumber(pageNumber);
-                  }}>
-                    {pageNumber}
-            </span>
-        )
-    })
-
     let usersElemets = props.users.map(user => <User user={user}
                                                      isFollowingInProgress={props.isFollowingInProgress}
                                                      followTC={props.followTC}
@@ -27,7 +12,10 @@ const Users = (props) => {
     return (
         <div className={s.users}>
             <div>
-                {pageNumberButtonsArray}
+                <Paginator sizePage={props.sizePage}
+                           totalCount={props.totalCount}
+                           currentPage={props.currentPage}
+                           onPageNumber={props.onPageNumber}/>
             </div>
             <div>
                 {props.isLoadingPage

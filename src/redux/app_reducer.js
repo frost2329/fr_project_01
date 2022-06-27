@@ -1,6 +1,6 @@
-import {authTC} from "./auth_reduser";
+import {authTC} from "./auth_reducer";
 
-const SET_INITIALIZED = 'SET_INITIALIZED';
+const SET_INITIALIZED = 'app_reducer/SET_INITIALIZED';
 
 let initialState = {
     initialized: false

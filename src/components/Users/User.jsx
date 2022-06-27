@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./User.module.css";
-import user_avatar_img from "../../../images/avatar_user_img.png";
+import user_avatar_img from "../../images/avatar_user_img.png";
 import {NavLink} from "react-router-dom";
 
 const User = (props) => {

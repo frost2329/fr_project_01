@@ -1,8 +1,8 @@
 import {profileAPI} from "../api/api";
 
-const ADD_POST = 'ADD_POST';
-const SET_PROFILE = 'SET_PROFILE';
-const SET_USER_STATUS = 'SET_USER_STATUS';
+const ADD_POST = 'profile_reducer/ADD_POST';
+const SET_PROFILE = 'profile_reducer/SET_PROFILE';
+const SET_USER_STATUS = 'profile_reducer/SET_USER_STATUS';
 
 let initialState = {
     profile: null,
