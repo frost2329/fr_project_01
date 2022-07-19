@@ -16,13 +16,16 @@ export const userAPI = {
         return instance
             .delete(`follow/${userId}`)
             .then(response => {
+                debugger;
                 return response.data;
             })
     },
     follow(userId) {
+        debugger;
         return instance
             .post(`follow/${userId}`)
             .then(response => {
+                debugger;
                 return response.data;
             })
     }
