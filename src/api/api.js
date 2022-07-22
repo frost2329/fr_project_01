@@ -1,10 +1,31 @@
 import * as axios from 'axios';
+const getInstanceForUser = (currentUserId) => {
+    debugger;
+    let apiKey;
+    switch (currentUserId) {
+        case 24031:
+            apiKey = 'c3a5ce8f-4dee-4c48-90c8-4b68b3dab507';
+            break;
+        case 25030:
+            apiKey = '9cef3074-c408-496c-b055-bc49968c822d';
+            break;
+    }
+    let instance = axios.create({
+        withCredentials: true,
+        baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+        headers: {'API-KEY': apiKey}
+    })
+    return instance;
+}
 let currentUserId;
-const instance = axios.create({
+
+let instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {'API-KEY': 'c3a5ce8f-4dee-4c48-90c8-4b68b3dab507'}
+
 })
+
 export const userAPI = {
     getUsers(sizePage= 10, currentPage= 1) {
         return instance
@@ -36,6 +57,8 @@ export const authAPI = {
         return instance
             .get(`auth/me`)
             .then(response => {
+                debugger;
+                currentUserId = response.data.data.id
                 return response.data;
             })
     },
@@ -76,6 +99,7 @@ export const profileAPI = {
             })
     },
     updateStatus(status) {
+        let instance = getInstanceForUser(currentUserId);
         return instance
             .put(`profile/status`, {status: status})
             .then(response => {
@@ -85,7 +109,9 @@ export const profileAPI = {
     updateAvatarImage(image) {
         let formData = new FormData();
         formData.append("image", image);
-        return instance.put('profile/photo', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+        let instance = getInstanceForUser(currentUserId);
+        return instance
+            .put('profile/photo', formData, {headers: {'Content-Type': 'multipart/form-data'}})
             .then(response => {
                 return response.data;
             })
