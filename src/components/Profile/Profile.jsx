@@ -7,6 +7,12 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = (props) => {
     if (!props.profile) return <Loading isLoading={true}/>
+
+    let onUpdateAvatarImage = (e) => {
+        debugger;
+        if (e.target.files.length > 0) {
+            props.updateAvatarImageTC(e.target.files[0])}
+        }
     return (
         <div className={s.wripper}>
             <div className={s.narrow_column_wrap}>
@@ -15,6 +21,7 @@ const Profile = (props) => {
                         <img className={s.avatar_img} src={props.profile.photos.large
                             ? props.profile.photos.large
                             : user_avatar_img} alt=""/>
+                        {props.isOwner && <input type='file' onChange={onUpdateAvatarImage}/>}
                     </div>
                     <div>
                         Редактировать

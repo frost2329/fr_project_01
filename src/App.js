@@ -24,7 +24,7 @@ class App extends React.Component {
             return <Loading isLoading={true}/>
         }
         return (
-            <BrowserRouter>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <div className="app-wrapper">
                     <Header/>
                     <div className='main_page'>

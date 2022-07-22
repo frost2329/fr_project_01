@@ -3,6 +3,7 @@ import {profileAPI} from "../api/api";
 const ADD_POST = 'profile_reducer/ADD_POST';
 const SET_PROFILE = 'profile_reducer/SET_PROFILE';
 const SET_USER_STATUS = 'profile_reducer/SET_USER_STATUS';
+const SET_AVATAR_IMAGE = 'profile_reducer/SET_AVATAR_IMAGE';
 
 let initialState = {
     profile: null,
@@ -57,6 +58,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 userStatus: action.userStatus
             }
+        case SET_AVATAR_IMAGE:
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            }
         default:
             return state;
     }
@@ -65,6 +71,7 @@ const profileReducer = (state = initialState, action) => {
 export const addPostAC = (post_text) => ({type: ADD_POST, post_text: post_text})
 export const setProfileAC = (profile) => ({type: SET_PROFILE, profile: profile})
 export const setUserStatusAC = (userStatus) => ({type: SET_USER_STATUS, userStatus: userStatus})
+export const setAvatarImage = (photos) => ({type: SET_AVATAR_IMAGE, photos: photos})
 
 export const getUserProfileTC = (userId) => {
     return (dispatch) => {
@@ -89,6 +96,16 @@ export const updateUserStatusTC = (status) => {
             .then((data) => {
                 if (data.resultCode === 0) {
                     dispatch(setUserStatusAC(status));
+                }
+            });
+    }
+}
+export const updateAvatarImageTC = (image) => {
+    return (dispatch) => {
+        profileAPI.updateAvatarImage(image)
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    dispatch(setAvatarImage(data.data.photos));
                 }
             });
     }

@@ -4,7 +4,7 @@ import Profile from "./Profile";
 import {
     addPostAC,
     getUserProfileTC,
-    getUserStatusTC,
+    getUserStatusTC, updateAvatarImageTC,
     updateUserStatusTC
 } from "../../redux/profile_reducer";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
@@ -18,14 +18,23 @@ class ProfileContainer extends React.Component {
         this.props.getUserProfileTC(this.props.router.params.userId ?? this.props.currentUserId)
         this.props.getUserStatusTC(this.props.router.params.userId ?? this.props.currentUserId)
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.router.params.userId != this.props.router.params.userId) {
+            this.props.getUserProfileTC(this.props.router.params.userId ?? this.props.currentUserId)
+            this.props.getUserStatusTC(this.props.router.params.userId ?? this.props.currentUserId)
+        }
+
+    }
 
     render() {
         return (
             <Profile profile={this.props.profile}
+                     isOwner={!this.props.router.params.userId}
                      userStatus={this.props.userStatus}
                      posts={this.props.posts}
                      addPostAC={this.props.addPostAC}
                      updateUserStatusTC={this.props.updateUserStatusTC}
+                     updateAvatarImageTC={this.props.updateAvatarImageTC}
             />
         )
     }
@@ -43,7 +52,8 @@ let mapDispatchToProps = {
     getUserProfileTC: getUserProfileTC,
     addPostAC: addPostAC,
     getUserStatusTC: getUserStatusTC,
-    updateUserStatusTC: updateUserStatusTC
+    updateUserStatusTC: updateUserStatusTC,
+    updateAvatarImageTC: updateAvatarImageTC
 }
 
 export default compose(
