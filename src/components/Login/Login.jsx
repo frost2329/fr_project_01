@@ -31,6 +31,12 @@ const LoginForm = (props) => {
             <div>
                 <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
             </div>
+            {props.captchaUrl &&
+                <div>
+                    <img src={props.captchaUrl} alt=""/>
+                    <Field placeHolder={"Captcha"} name={"captcha"} component={Input} validate={required}/>
+                </div>
+            }
             <div>
                 <button>Login</button>
             </div>
@@ -45,7 +51,7 @@ const Login = (props) => {
     }
     return (
         <div>
-            <LoginReduxForm onSubmit={(formData) => {
+            <LoginReduxForm captchaUrl={props.captchaUrl} onSubmit={(formData) => {
                 props.loginTC(formData)
             }}/>
         </div>
@@ -54,7 +60,8 @@ const Login = (props) => {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: getIsAuth(state)
+        isAuth: getIsAuth(state),
+        captchaUrl: state.auth.captchaUrl
     }
 }
 let mapDispatchToProps = {

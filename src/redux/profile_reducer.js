@@ -34,7 +34,6 @@ const profileReducer = (state = initialState, action) => {
 
             }
         case SET_PROFILE:
-            debugger;
             return {
                 ...state,
                 profile: {...state.profile, ...action.profile}
@@ -100,7 +99,6 @@ export const updateProfileDataTC = (profileData) => {
         if (response.resultCode === 0) {
             dispatch(getUserProfileTC(currentUserId));
         }else {
-            debugger;
             dispatch(stopSubmit('edit_profile', {_error: response.messages[0] }))
             return Promise.reject(response.messages[0])
         }

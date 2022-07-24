@@ -11,7 +11,6 @@ const ProfileInfo = (props) => {
     let onSubmit = (formData) => {
         props.updateProfileDataTC(formData).then(
             ()=> {
-                debugger;
                 setEditMode(false);
             }
         );
