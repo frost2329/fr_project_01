@@ -4,7 +4,7 @@ import Profile from "./Profile";
 import {
     addPostAC,
     getUserProfileTC,
-    getUserStatusTC, updateAvatarImageTC,
+    getUserStatusTC, updateAvatarImageTC, updateProfileDataTC,
     updateUserStatusTC
 } from "../../redux/profile_reducer";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
@@ -33,6 +33,7 @@ class ProfileContainer extends React.Component {
                      userStatus={this.props.userStatus}
                      posts={this.props.posts}
                      addPostAC={this.props.addPostAC}
+                     updateProfileDataTC={this.props.updateProfileDataTC}
                      updateUserStatusTC={this.props.updateUserStatusTC}
                      updateAvatarImageTC={this.props.updateAvatarImageTC}
             />
@@ -52,6 +53,7 @@ let mapDispatchToProps = {
     getUserProfileTC: getUserProfileTC,
     addPostAC: addPostAC,
     getUserStatusTC: getUserStatusTC,
+    updateProfileDataTC: updateProfileDataTC,
     updateUserStatusTC: updateUserStatusTC,
     updateAvatarImageTC: updateAvatarImageTC
 }

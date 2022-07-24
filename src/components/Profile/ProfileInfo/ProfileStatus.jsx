@@ -23,8 +23,8 @@ const ProfileStatus = (props) => {
         <div>
             {!editMode &&
                 <div>
-                        <span onDoubleClick={() => {toggleEditMode(true)}}>
-                            {!props.userStatus || props.userStatus == '' ? 'установить статус' : props.userStatus}
+                        <span onDoubleClick={() => {props.isOwner && toggleEditMode(true)}}>
+                            {props.isOwner && (!props.userStatus || props.userStatus == '') ? 'установить статус' : props.userStatus}
                         </span>
                 </div>
             }

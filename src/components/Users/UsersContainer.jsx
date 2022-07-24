@@ -14,7 +14,6 @@ import {
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        debugger;
         this.props.getUsersTC(this.props.sizePage, this.props.currentPage)
     }
 

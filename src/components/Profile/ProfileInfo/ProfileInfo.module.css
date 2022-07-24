@@ -3,3 +3,9 @@
 .user_name {
     font-size: x-large;
 }
+.contact {
+    padding-left: 10px;
+}
+.error {
+    color:red;
+}

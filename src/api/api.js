@@ -1,6 +1,5 @@
 import * as axios from 'axios';
 const getInstanceForUser = (currentUserId) => {
-    debugger;
     let apiKey;
     switch (currentUserId) {
         case 24031:
@@ -38,16 +37,13 @@ export const userAPI = {
         return instance
             .delete(`follow/${userId}`)
             .then(response => {
-                debugger;
                 return response.data;
             })
     },
     follow(userId) {
-        debugger;
         return instance
             .post(`follow/${userId}`)
             .then(response => {
-                debugger;
                 return response.data;
             })
     }
@@ -57,7 +53,6 @@ export const authAPI = {
         return instance
             .get(`auth/me`)
             .then(response => {
-                debugger;
                 currentUserId = response.data.data.id
                 return response.data;
             })
@@ -102,6 +97,14 @@ export const profileAPI = {
         let instance = getInstanceForUser(currentUserId);
         return instance
             .put(`profile/status`, {status: status})
+            .then(response => {
+                return response.data;
+            })
+    },
+    updateProfileData(data) {
+        let instance = getInstanceForUser(currentUserId);
+        return instance
+            .put(`profile`, data)
             .then(response => {
                 return response.data;
             })

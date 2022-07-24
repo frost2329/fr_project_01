@@ -9,7 +9,6 @@ const Profile = (props) => {
     if (!props.profile) return <Loading isLoading={true}/>
 
     let onUpdateAvatarImage = (e) => {
-        debugger;
         if (e.target.files.length > 0) {
             props.updateAvatarImageTC(e.target.files[0])}
         }
@@ -30,8 +29,10 @@ const Profile = (props) => {
             </div>
             <div className={s.wide_column_wrap}>
                 <div className={s.page_info_block}>
-                    <ProfileInfo fullName={props.profile.fullName}
+                    <ProfileInfo profile={props.profile}
+                                 isOwner={props.isOwner}
                                  userStatus={props.userStatus}
+                                 updateProfileDataTC={props.updateProfileDataTC}
                                  updateUserStatusTC={props.updateUserStatusTC}/>
                 </div>
                 <MyPosts posts={props.posts}
