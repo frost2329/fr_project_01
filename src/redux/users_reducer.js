@@ -1,4 +1,5 @@
 import {userAPI} from "../api/api";
+import {showErrorTC} from "./app_reducer";
 const FOLLOW = 'users_reducer/FOLLOW';
 const UNFOLLOW = 'users_reducer/UNFOLLOW';
 const SET_USERS = 'users_reducer/SET_USERS';
@@ -72,40 +73,50 @@ export const toggleIsLoadingPageAC = (isLoading) => ({type: TOGGLE_IS_LOADING_PA
 export const toggleIsFollowingInProgressAC = (isLoading, userId) => ({type: TOGGLE_IS_FOLLOWING_IN_PROGRESS, isLoading: isLoading, userId: userId});
 
 export const getUsersTC = (sizePage, currentPage) => {
-    return (dispatch) => {
-        dispatch(toggleIsLoadingPageAC(true));
-        dispatch(setCurrentPageAC(currentPage));
-        userAPI.getUsers(sizePage, currentPage)
-            .then((data) => {
-                dispatch(toggleIsLoadingPageAC(false));
-                dispatch(setUsersAC(data.items));
-                dispatch(setTotalCountAC(data.totalCount));
-            })
+    return async (dispatch) => {
+        try {
+            dispatch(toggleIsLoadingPageAC(true));
+            dispatch(setCurrentPageAC(currentPage));
+            let response =  await userAPI.getUsers(sizePage, currentPage)
+            dispatch(toggleIsLoadingPageAC(false));
+            dispatch(setUsersAC(response.items));
+            dispatch(setTotalCountAC(response.totalCount));
+        }
+        catch (error) {
+            dispatch(showErrorTC(error.message));
+        }
     }
 }
 export const followTC = (userId) => {
-    return (dispatch) => {
-        dispatch(toggleIsFollowingInProgressAC(true, userId))
-        userAPI.follow(userId)
-            .then((data) => {
-                dispatch(toggleIsFollowingInProgressAC(false, userId))
-                if (data.resultCode === 0) {
-                    dispatch(followAC(userId));
-                }
-            })
+    return async (dispatch) => {
+        try {
+            dispatch(toggleIsFollowingInProgressAC(true, userId))
+            let response =  await userAPI.follow(userId)
+            dispatch(toggleIsFollowingInProgressAC(false, userId))
+            if (response.resultCode === 0) {
+                dispatch(followAC(userId));
+            }
+        }
+        catch (error) {
+            dispatch(showErrorTC(error.message));
+        }
+    }
+}
+export const unFollowTC = (userId) => {
+    return async (dispatch) => {
+        try {
+            dispatch(toggleIsFollowingInProgressAC(true, userId))
+            let response =  await userAPI.unFollow(userId)
+            dispatch(toggleIsFollowingInProgressAC(false, userId))
+            if (response.resultCode === 0) {
+                dispatch(unFollowAC(userId));
+            }
+        }
+        catch (error) {
+            dispatch(showErrorTC(error.message));
+        }
     }
 }
 
-export const unFollowTC = (userId) => {
-    return (dispatch) => {
-        dispatch(toggleIsFollowingInProgressAC(true, userId))
-        userAPI.unFollow(userId)
-            .then((data) => {
-                dispatch(toggleIsFollowingInProgressAC(false, userId))
-                if (data.resultCode === 0) {
-                    dispatch(unFollowAC(userId));
-                }
-            })
-    }
-}
+
 export default usersReducer;

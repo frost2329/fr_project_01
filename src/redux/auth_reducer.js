@@ -1,5 +1,6 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {showErrorTC} from "./app_reducer";
 
 const SET_USER_AUTH_DATA = 'auth_reducer/SET_USER_AUTH_DATA';
 const SET_AUTH = 'auth_reducer/SET_AUTH';
@@ -37,45 +38,55 @@ const authReducer = (state = initialState, action) => {
 }
 export const setUserAuthDataAC = (userId, email, login, isAuth ) => ({type: SET_USER_AUTH_DATA, authData: {userId, email, login, isAuth}});
 export const setCaptchaUrlAC = (url) => ({type: SET_CAPTCHA_URL, url:url });
+
 export const authTC = () => {
-    return (dispatch) => {
-        return authAPI.auth()
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    let {id, email, login} = data.data;
-                    dispatch(setUserAuthDataAC(id, email, login, true));
-                }
-            });
+    return async (dispatch) => {
+        try {
+            let response =  await authAPI.auth()
+            if (response.resultCode === 0) {
+                let {id, email, login} = response.data;
+                dispatch(setUserAuthDataAC(id, email, login, true));
+            }
+        }
+        catch (error) {
+            dispatch(showErrorTC(error.message));
+        }
     }
 }
 
 export const loginTC = (loginData) => {
-    return (dispatch) => {
-        authAPI.login(loginData)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    dispatch(authTC());
-                }else if (data.resultCode === 10){
-                    authAPI.getCaptchaUrl()
-                        .then((data)=>{
-                            dispatch(setCaptchaUrlAC(data.url))
-                        })
-                }
-                else {
-                    let message = data.messages.length > 0 ? data.messages[0] : 'Some error'
-                    dispatch(stopSubmit('login', {_error: message}))
-                }
-            });
+    return async (dispatch) => {
+        try {
+            let response =  await authAPI.login(loginData)
+            if (response.resultCode === 0) {
+                dispatch(authTC());
+            }else if (response.resultCode === 10){
+                authAPI.getCaptchaUrl()
+                    .then((data)=>{
+                        dispatch(setCaptchaUrlAC(data.url))
+                    })
+            }
+            else {
+                let message = response.messages.length > 0 ? response.messages[0] : 'Some error'
+                dispatch(stopSubmit('login', {_error: message}))
+            }
+        }
+        catch (error) {
+            dispatch(showErrorTC(error.message));
+        }
     }
 }
 export const logoutTC = () => {
-    return (dispatch) => {
-        authAPI.logout()
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    dispatch(setUserAuthDataAC(null, null, null, false));
-                }
-            });
+    return async (dispatch) => {
+        try {
+            let response =  await authAPI.logout()
+            if (response.resultCode === 0) {
+                dispatch(setUserAuthDataAC(null, null, null, false));
+            }
+        }
+        catch (error) {
+            dispatch(showErrorTC(error.message));
+        }
     }
 }
 export default authReducer;

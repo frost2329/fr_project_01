@@ -27,7 +27,7 @@ const NewPostForm = (props) => {
 const NewPostReduxForm = reduxForm({form:'newPost'})(NewPostForm)
 
 const MyPosts = React.memo(props => {
-    let postElements = props.posts.map(p => <Post postState={p}/>);
+    let postElements = props.posts.map(p => <Post key={p.id.toString()} postState={p}/>);
     return (
         <div className={s.my_posts}>
             <div className={s.new_post}>

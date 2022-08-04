@@ -5,7 +5,8 @@ import Loading from "../common/Loading/Loading";
 import Paginator from "../common/Paginator/Paginator";
 
 const Users = (props) => {
-    let usersElemets = props.users.map(user => <User user={user}
+    let usersElemets = props.users.map(user => <User key={user.id.toString()}
+                                                     user={user}
                                                      isFollowingInProgress={props.isFollowingInProgress}
                                                      followTC={props.followTC}
                                                      unFollowTC={props.unFollowTC}/>);

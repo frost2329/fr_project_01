@@ -19,4 +19,27 @@
   min-height: 1000px;
   margin: 0 auto;
 }
+/*#er {
+  background: #000;
+  height: 100%;
+  opacity: 0.9;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  top: 10%;
+  left: 10%;
+}*/
 
+.error_popup {
+  background-color: #ffffff ;
+  height: 60px;
+  width: 150px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  color: teal;
+  border-radius: 10px;
+  border: black 3px;
+
+
+}

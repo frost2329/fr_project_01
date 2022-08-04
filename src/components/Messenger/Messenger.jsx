@@ -12,10 +12,11 @@ const NewMessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeHolder={"new message"}
+                <Field placeHolder={"newMessage"}
                        name={'newMessage'}
                        component={Textarea}
                        validate={[maxLength]}
+                       type="text"
                 />
             </div>
             <div>
@@ -28,8 +29,8 @@ const NewMessageForm = (props) => {
 const NewMessageReduxForm = reduxForm({form:'newMessage'})(NewMessageForm)
 
 const  Messenger = (props) => {
-    let dialogElements = props.dialogs.map( d => <Dialog id={d.id} name={d.name}/> )
-    let messageElements = props.messages.map( m => <Message massage_text={m.message_text}/> )
+    let dialogElements = props.dialogs.map( d => <Dialog key={d.id.toString()} id={d.id} name={d.name}/> )
+    let messageElements = props.messages.map( m => <Message key={m.message_id.toString()} massage_text={m.message_text}/> )
 
     return (
         <div className={s.messenger}>

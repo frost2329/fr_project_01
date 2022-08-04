@@ -1,5 +1,6 @@
 import {profileAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {showErrorTC} from "./app_reducer";
 
 const ADD_POST = 'profile_reducer/ADD_POST';
 const SET_PROFILE = 'profile_reducer/SET_PROFILE';
@@ -53,54 +54,67 @@ export const setProfileAC = (profile) => ({type: SET_PROFILE, profile: profile})
 export const setUserStatusAC = (userStatus) => ({type: SET_USER_STATUS, userStatus: userStatus})
 
 export const getUserProfileTC = (userId) => {
-    return (dispatch) => {
-        profileAPI.getProfile(userId)
-            .then((data) => {
-                dispatch(setProfileAC(data));
-            });
+    return async (dispatch) => {
+        try {
+            let response =  await profileAPI.getProfile(userId)
+            dispatch(setProfileAC(response));
+        }
+        catch (error) {
+            dispatch(showErrorTC(error.message));
+        }
     }
 }
 export const getUserStatusTC = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId)
-            .then((data) => {
-                dispatch(setUserStatusAC(data));
-            });
+    return async (dispatch) => {
+        try {
+            let response = await profileAPI.getStatus(userId)
+            dispatch(setUserStatusAC(response));
+        } catch (error) {
+            dispatch(showErrorTC(error.message));
+        }
     }
 }
 
 export const updateUserStatusTC = (status) => {
-    return (dispatch) => {
-        console.log(status);
-        profileAPI.updateStatus(status)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    dispatch(setUserStatusAC(status));
-                }
-            });
+    return async (dispatch) => {
+        try {
+            let response = await profileAPI.updateStatus(status)
+            if (response.resultCode === 0) {
+                dispatch(setUserStatusAC(status));
+            }
+        } catch (error) {
+            debugger;
+            dispatch(showErrorTC(error.message));
+        }
     }
 }
+
 export const updateAvatarImageTC = (image) => {
-    return (dispatch, getState) => {
-        const currentUserId = getState().auth.userId
-        profileAPI.updateAvatarImage(image)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    dispatch(getUserProfileTC(currentUserId));
-                }
-            });
+    return async (dispatch, getState) => {
+        try {
+            let response = await profileAPI.updateAvatarImage(image)
+            const currentUserId = getState().auth.userId
+            if (response.resultCode === 0) {
+                dispatch(getUserProfileTC(currentUserId));
+            }
+        } catch (error) {
+            dispatch(showErrorTC(error.message));
+        }
     }
 }
 export const updateProfileDataTC = (profileData) => {
-    return  async  (dispatch, getState) => {
-        const currentUserId = getState().auth.userId
-        const response = await profileAPI.updateProfileData(profileData)
-
-        if (response.resultCode === 0) {
-            dispatch(getUserProfileTC(currentUserId));
-        }else {
-            dispatch(stopSubmit('edit_profile', {_error: response.messages[0] }))
-            return Promise.reject(response.messages[0])
+    return async (dispatch, getState) => {
+        try {
+            const currentUserId = getState().auth.userId
+            let response = await profileAPI.updateProfileData(profileData)
+            if (response.resultCode === 0) {
+                dispatch(getUserProfileTC(currentUserId));
+            }else {
+                dispatch(stopSubmit('edit_profile', {_error: response.messages[0] }))
+                return Promise.reject(response.messages[0])
+            }
+        } catch (error) {
+            dispatch(showErrorTC(error.message));
         }
     }
 }
