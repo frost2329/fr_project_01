@@ -3,7 +3,7 @@ const getInstanceForUser = (currentUserId) => {
     let apiKey;
     switch (currentUserId) {
         case 24031:
-            apiKey = 'c3a5ce8f-4dee-4c48-90c8-4b68b3dab507_';
+            apiKey = 'c3a5ce8f-4dee-4c48-90c8-4b68b3dab507';
             break;
         case 25030:
             apiKey = '9cef3074-c408-496c-b055-bc49968c822d';
